@@ -5,14 +5,14 @@ exports.getUsers = async (req, res) => {
   try {
     const user = await users.findAll({
       attributes: {
-        exclude: ["createdAt", "updatedAt"],
+        exclude: ["createdAt", "updatedAt", "password"],
       },
     });
 
     res.send({
       status: "success",
       data: {
-        user,
+        users: user,
       },
     });
   } catch (error) {
@@ -94,6 +94,31 @@ exports.addUser = async (req, res) => {
       data: {
         fullname,
         role,
+      },
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({
+      status: "error",
+      message: "Server Error",
+    });
+  }
+};
+exports.getUser = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const findUser = await users.findOne({
+      attributes: {
+        exclude: ["password", "createdAt", "updatedAt"],
+      },
+      where: {
+        id,
+      },
+    });
+    res.send({
+      status: "success",
+      data: {
+        user: findUser,
       },
     });
   } catch (error) {
