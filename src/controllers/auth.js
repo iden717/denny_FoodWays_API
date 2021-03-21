@@ -17,7 +17,7 @@ exports.register = async (req, res) => {
     });
 
     const { error } = schema.validate(req.body);
-    console.log("body", password);
+
     if (error)
       return res.status(400).send({
         status: "Validate Failed",
@@ -108,7 +108,7 @@ exports.login = async (req, res) => {
         message: "Your credentials is not valid",
       });
 
-    const secretKey = "kamucantik3492";
+    const secretKey = "b21";
     const token = jwt.sign(
       {
         id: checkEmail.id,

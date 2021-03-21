@@ -13,7 +13,7 @@ exports.checkAuth = (req, res, next) => {
   }
 
   try {
-    const secretKey = "kamucantik3492";
+    const secretKey = "b21";
 
     const verified = jwt.verify(token, secretKey);
     req.userId = verified;
